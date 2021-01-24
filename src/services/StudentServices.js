@@ -26,7 +26,7 @@ class StudentServices {
 						const studentName = $('h3').text().split('Rank')[0].trim();
 
 						if (studentName !== 'Edit User InfoChange Password') {
-							students.push({ id: i, name: studentName.toLowerCase().split(' ').join('') });
+							students.push({ id: i, name: studentName });
 						}
 					} catch (e) {
 						console.log(e.message);
@@ -63,12 +63,13 @@ class StudentServices {
 			return e;
 		}
 	}
-	async getPointByName({name}) {
+	async getPointByName({ name }) {
 		const students = await this.allInfo();
-		const { id } = students.find((student) => student.name === name);
+		const { studentName, id } = students.find((student) => student.name.trim().split(' ').join('') === name);
 		let info = await this.getPointById(id);
-		info.pointURL = process.env.KITPOINT_URL
-		return { error : false, message : `Successfully retreive student info.`, data : info};
+		info.pointURL = process.env.KITPOINT_URL;
+		info.name = studentName;
+		return { error: false, message: `Successfully retreive student info.`, data: { ...info } };
 	}
 }
 
