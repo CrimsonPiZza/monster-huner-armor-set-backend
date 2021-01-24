@@ -69,7 +69,7 @@ class StudentServices {
 		let info = await this.getPointById(id);
 		info.pointURL = process.env.KITPOINT_URL;
 		info.name = studentName;
-		return { error: false, message: `Successfully retreive student info.`, data: { ...info } };
+		return { error: false, message: `Successfully retreive student info.`, data: info };
 	}
 }
 
