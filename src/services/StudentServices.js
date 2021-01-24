@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 
 require('dotenv').config();
 
-class Student {
+class StudentServices {
 	constructor() {}
 	async allInfo() {
 		const config = {
@@ -42,14 +42,14 @@ class Student {
 			return e;
 		}
 	}
-	async getPointById(studentId) {
+	async getPointById(id) {
 		const config = {
 			headers: {
 				cookie: process.env.KITPOINT_COOKIES.trim()
 			}
 		};
 		try {
-			const result = await axios.get(`${process.env.KITPOINT_URL}/student/profile/${studentId}`, config);
+			const result = await axios.get(`${process.env.KITPOINT_URL}/student/profile/${id}`, config);
 			const $ = cheerio.load(result.data);
 			const img = $('img')['3'].attribs.src;
 			const rank = $('small').text().split('Rank')[1].trim();
@@ -63,14 +63,13 @@ class Student {
 			return e;
 		}
 	}
-	async getPointByName(name) {
+	async getPointByName({name}) {
 		const students = await this.allInfo();
 		const { id } = students.find((student) => student.name === name);
-		console.log(id);
-		const info = await this.getPointById(id);
-
-		return info;
+		let info = await this.getPointById(id);
+		info.pointURL = process.env.KITPOINT_URL
+		return { error : false, message : `Successfully retreive student info.`, data : info};
 	}
 }
 
-module.exports = new Student();
+module.exports = new StudentServices();
