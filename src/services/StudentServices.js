@@ -65,10 +65,13 @@ class StudentServices {
 	}
 	async getPointByName({ name }) {
 		const students = await this.allInfo();
-		const { studentName, id } = students.find((student) => student.name.trim().split(' ').join('') === name);
-		let info = await this.getPointById(id);
+		const foundStudent = students.find((student) => student.name.trim().toLowerCase().split(' ').join('') === name);
+		// If cannot find the student with the given name
+		if (foundStudent === undefined) return { error: true, message: `Student not found`}
+		
+		let info = await this.getPointById(foundStudent.id);
 		info.pointURL = process.env.KITPOINT_URL;
-		info.name = studentName;
+		info.name = foundStudent.name;
 		return { error: false, message: `Successfully retreive student info.`, data: info };
 	}
 }

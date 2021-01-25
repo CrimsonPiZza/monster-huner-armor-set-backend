@@ -73,7 +73,7 @@ class adminService{
                 session.absentees = []
                 // Loop through student to check for their id
                 students.forEach(async student => {
-                    const stud = await Student.findOne({ name : student.name, email : student.email })
+                    const stud = await Student.findOne({ name : student.name })
                     await session.updateOne({ $addToSet : { absentees : stud._id } })
                 })
 
@@ -157,4 +157,4 @@ class adminService{
 
 }
 
-module.exports = adminService;
+module.exports = new adminService();

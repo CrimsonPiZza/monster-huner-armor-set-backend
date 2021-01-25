@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.js",
-    "createNewToken": "node src/utilities/createNewToken.js"
+    "createNewToken": "node src/utilities/createNewToken.js",
+    "registerStudents": "node src/utilities/registerNewStudents.js" 
   },
   "keywords": [
     "attendance",

@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const verify = require("../utilities/verifyToken");
-const AdminService = require("../services/adminServices");
+const adminService = require("../services/adminServices");
 const { async } = require("validate.js");
 const student = require("../models/student");
-const adminService = new AdminService();
 require("dotenv").config();
 
 
