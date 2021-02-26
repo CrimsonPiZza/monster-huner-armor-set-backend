@@ -6,8 +6,12 @@ module.exports = async function auth(req, res, next) {
   if (!token) return res.json({ invalid_token: "Access Denied" });
 
   try {
-    const decode = jwt.decode(token, {complete: true})
-    jwt.verify(token, publicKeys[decode.header.kid], function(err, decoded) {
+    const { payload, header } = jwt.decode(token, {complete: true})
+    jwt.verify(token, publicKeys[header.kid], function(err, decoded) {
+      res.user = {
+        user_id: payload.user_id,
+        name: payload.name
+      }
       next();
     }); 
   } catch (err) {

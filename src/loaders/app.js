@@ -1,18 +1,11 @@
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const admin = require("firebase-admin");
-const serviceAccount = require("../../mh-fashionset-privatekey.json");
-
+const UserModel = require('../models/user')
 require('dotenv').config();
 
 // Import Routes
-// const adminRoute = require('../routes/admin');
 const userRoute = require('../routes/user');
 
-// Initialize Firebase Admin
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount)
-});
 
 module.exports = async (app) => {
 	//MiddleWares
@@ -24,7 +17,6 @@ module.exports = async (app) => {
 	app.use(bodyParser.json({ limit: '10mb', extended: true }));
 	app.use(cors());
 
-	// app.use('/admin', adminRoute);
 	app.use('/user', userRoute);
 
 	return app;
