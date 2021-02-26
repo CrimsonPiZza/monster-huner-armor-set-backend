@@ -35,12 +35,11 @@ class adminService{
                 // Add Session to Date Object
                 await DateObject.sessions.push(newSession._id)
                 await DateObject.save()
-
+                return resolve({ error : false, message : `Successfully create session on : ${date} | with name: ${name}`, _id : newSession._id})
             } catch (error) {
                 console.log(error)
                 return resolve({ error : true, message : "Failed to create new Session Object."})
             }
-            return resolve({ error : false, message : `Successfully create session on : ${date} | with name: ${name}`})
         });
     }
 

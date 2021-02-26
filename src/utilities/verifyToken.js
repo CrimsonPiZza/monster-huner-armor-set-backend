@@ -1,14 +1,16 @@
-const jwt = require("jsonwebtoken");
-
-module.exports = function auth(req, res, next) {
-  const token = req.header("auth-token");
-  if (!token) return res.json({ token_failed: "Access Denied" });
+// Need to handle, re-fetching public keys from google https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com#
+const jwt = require('jsonwebtoken')
+const publicKeys = require("../../cache_firebase_publickey.json");
+module.exports = async function auth(req, res, next) {
+  const token = req.header("id_token");
+  if (!token) return res.json({ invalid_token: "Access Denied" });
 
   try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log("New Connection From : " + verified.role);
-    next();
+    const decode = jwt.decode(token, {complete: true})
+    jwt.verify(token, publicKeys[decode.header.kid], function(err, decoded) {
+      next();
+    }); 
   } catch (err) {
-    res.json({ message: "Invalid Token" });
+    res.json({ invalid_token: "Access Denied" });
   }
 };
