@@ -17,7 +17,7 @@ router.get("/signup", authRequired, async (req, res) => {
     res.json(result)
 });
 
-router.get("/getArmor", authRequired, pagination(ArmorsetModel), async (req, res) => {
+router.get("/getAllArmor", authRequired, pagination(ArmorsetModel), async (req, res) => {
     res.json(res.paginatedResults)
 })
 
