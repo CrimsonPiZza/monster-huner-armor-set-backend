@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm src/server.js",
-    "devStart": "nodemon src/server.js"
+    "devStart": "nodemon src/server.js",
+    "addDummyArmors": "node src/dev_utils/InitializeFashionCard.js"
   },
   "keywords": [
     "monster_hunter",

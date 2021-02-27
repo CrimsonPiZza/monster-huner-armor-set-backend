@@ -38,13 +38,7 @@ const schema = mongoose.Schema({
     type: String,
     require: true,
     default: new Date(),
-  },
-  sessions: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
-    },
-  ],
+  }
 });
 
 module.exports = mongoose.model("armorsets", schema);

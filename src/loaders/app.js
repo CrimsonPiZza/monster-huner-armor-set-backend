@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const UserModel = require('../models/user')
 require('dotenv').config();
 
 // Import Routes

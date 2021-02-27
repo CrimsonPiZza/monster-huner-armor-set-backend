@@ -1,10 +1,11 @@
 const UserModel = require("../models/user")
 class userService{
-    async signUp(user_id){
+    async signUp(user_id, name){
         return new Promise(async (resolve, reject) => {
             try {
                 const user = new UserModel({
-                    user_id
+                    user_id,
+                    name
                 })
                 await user.save()
                 return resolve({ error : false, message : "Successfully sign up."})
