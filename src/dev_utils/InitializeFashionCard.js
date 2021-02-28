@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const ArmorsetModel = require('../models/armorset')
 require('dotenv').config();
 
-const authorObjectId = "603a0a7f6a85e0253433777c"
+const authorObjectId = "603a476430029d40a4141661"
 
 const dummy = [
   

@@ -31,7 +31,7 @@ const schema = mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "users",
     require: true,
   },
   date: {

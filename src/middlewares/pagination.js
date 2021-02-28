@@ -2,7 +2,8 @@ module.exports = function paginatedResults(model) {
     return async (req, res, next) => {
         const page = parseInt(req.query.page)
         const limit = parseInt(req.query.limit)
-        
+        console.log('page : ', page)
+        console.log('limit : ', limit)
         const startIndex = (page - 1) * limit
         const endIndex = page * limit
 
@@ -23,7 +24,10 @@ module.exports = function paginatedResults(model) {
         }
 
         try {
-            results.result = await model.find().limit(limit).skip(startIndex)
+            results.result = await model.find().limit(limit).skip(startIndex).populate({
+                path : "author", 
+                select : {name:1,_id:1},  
+            })
             res.paginatedResults = results
             next()
         } catch (error) {
