@@ -4,8 +4,8 @@ const { shuffle, randomPickOneFromArray, generateName } = require("./customRando
 require('dotenv').config();
 
 const authorObjectId = [
-  "603a0a7f6a85e0253433777c",
-  "603ba378a151122e14a333cf"
+  "603d165c38c800456c4a6f78",
+  "603d168438c800456c4a6f79"
 ]
 let images = [
   "https://i.ibb.co/3MNqtqX/Dr12aio-Vs-AATR-T.jpg",
@@ -63,7 +63,9 @@ for (let image in images){
     arms : `${generateName(5)} ${generateName(4)}`,
     waist : `${generateName(5)} ${generateName(4)}`,
     greaves : `${generateName(5)} ${generateName(4)}`,
-    author : randomPickOneFromArray(authorObjectId)
+    author : randomPickOneFromArray(authorObjectId),
+    isFemale : randomPickOneFromArray([true, false]),
+    isBladeMaster : randomPickOneFromArray([true, false])
   }
   dummy.push(card)
 }

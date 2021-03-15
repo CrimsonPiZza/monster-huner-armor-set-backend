@@ -34,6 +34,16 @@ const schema = mongoose.Schema({
     ref: "users",
     require: true,
   },
+  isFemale : {
+    type : Boolean,
+    require : true,
+    default : true,
+  },
+  isBladeMaster : {
+    type : Boolean,
+    require : true,
+    default : true
+  },
   date: {
     type: String,
     require: true,
